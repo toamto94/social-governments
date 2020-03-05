@@ -14,7 +14,7 @@ ui <- function() {
         header <- shinydashboard::dashboardHeader(
             title = "Social Bonds",
             tags$li(class="dropdown",
-                    tags$a(href="http://github.com/",
+                    tags$a(href="https://github.com/toamto94/social-governments/",
                     shiny::icon("github"), "Source Code", target = "blank")),
             tags$li(class="dropdown",
                     tags$a(href="http://github.com/",

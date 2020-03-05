@@ -24,4 +24,8 @@ Imports:
     DT,
     shinyjqui,
     plotly,
-    shinydashboardPlus
+    shinydashboardPlus,
+    odbc,
+    configr,
+    RPostgreSQL,
+    DBI
