@@ -1,0 +1,13 @@
+name: ciceroUI
+title: ciceroUI
+username:
+account: sflippl
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 1649898
+bundleId: 2739347
+url: https://sflippl.shinyapps.io/ciceroUI/
+when: 1579441106.96371
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: .Rbuildignore|DESCRIPTION|NAMESPACE|data-raw/model.R|man/geocode.Rd|man/vis_leaflet.Rd|routines/update-data.R
