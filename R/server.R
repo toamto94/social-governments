@@ -3,6 +3,20 @@ server <- function(input, output) {
         start_country <- TRUE
     }
 
+    library(odbc)
+    library(configr)
+    library(RPostgreSQL)
+    library(DBI)
+
+    param <- configr::read.config("C:/Users/fabia/Desktop/social-governments/config2.ini")
+    drv <- DBI::dbDriver("PostgreSQL")
+    con <- tryCatch(dbConnect(drv, dbname = param$dbname,
+                              host = param$host, port = param$port,
+                              user = param$user, password = param$password), error = function(e) e)
+    if(any(!(class(con) == "error"))){
+        indicatorss <- DBI::dbGetQuery(con, "SELECT * from indicators")
+    } else {load("data/df_indicators.RData")}
+
     output$subdimension_out <- shiny::renderUI({
         vec_subdimension <-
             model %>%
@@ -61,7 +75,7 @@ server <- function(input, output) {
 
     output$map <- leaflet::renderLeaflet({
         shiny::validate(
-            shiny::need(any(input$indicator %in% colnames(indicators)), "loading")
+            shiny::need(any(input$indicator %in% colnames(indicatorss)), "loading")
         )
         if(is.numeric(indicators[[input$indicator]]))
             indicators[[input$indicator]] <- round(indicators[[input$indicator]], digits = 2)
