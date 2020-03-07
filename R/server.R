@@ -7,14 +7,18 @@ server <- function(input, output) {
     library(configr)
     library(RPostgreSQL)
     library(DBI)
+	library(readr)
+	
+	
 
     param <- configr::read.config("C:/Users/fabia/Desktop/social-governments/config2.ini")
     drv <- DBI::dbDriver("PostgreSQL")
+	sql_statement <- read_file("C:/Users/fabia/Desktop/social-governments/SQL/1.sql")
     con <- tryCatch(dbConnect(drv, dbname = param$dbname,
                               host = param$host, port = param$port,
                               user = param$user, password = param$password), error = function(e) e)
     if(any(!(class(con) == "error"))){
-        indicatorss <- DBI::dbGetQuery(con, "SELECT * from indicators")
+        indicatorss <- DBI::dbGetQuery(con, sql_statement)
     } else {load("data/df_indicators.RData")}
 
     output$subdimension_out <- shiny::renderUI({
